@@ -37,3 +37,27 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+.profile-carousel {
+  display: flex;
+}
+
+.profile-carousel-item {
+  width: 200px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 10px;
+  box-shadow: 1px 1px 5px#cccccc;
+  padding: 5px;
+}
+
+.profile-carousel .profile-nav-icons {
+  background-color: #cccccc;
+  display: inline-block;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  padding: 9px;
+}
