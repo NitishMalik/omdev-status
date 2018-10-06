@@ -7,6 +7,7 @@ import ProfileAbout from './ProfileAbout';
 import ProfileTasks from './ProfileTasks';
 import Spinner from '../common/Spinner';
 import { getProfileByHandle } from '../../actions/profileActions';
+import ProfileCarousel from '../profileCarousel/ProfileCarousel';
 
 class Profile extends Component {
 	componentDidMount() {
@@ -44,6 +45,10 @@ class Profile extends Component {
 					<div className="row">
 						<div className="col-md-12">{profileContent}</div>
 					</div>
+				</div>
+
+				<div className="profiles-footer">
+					<ProfileCarousel/>
 				</div>
 			</div>
 		);
