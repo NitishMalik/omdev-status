@@ -2,3 +2,6 @@
 package-lock.json
 /config/keys_dev.js
 yarn.lock
+.vscode/settings.json
+.vscode/launch.json
+package-lock.json

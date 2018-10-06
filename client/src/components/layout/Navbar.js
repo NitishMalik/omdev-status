@@ -18,7 +18,7 @@ class Navbar extends Component {
 			<ul className="navbar-nav ml-auto">
 				<li className="nav-item">
 					<Link className="nav-link" to="/feed">
-						Post Feed
+						Anouncements
 					</Link>
 				</li>
 				<li className="nav-item">
@@ -30,9 +30,9 @@ class Navbar extends Component {
 					<a href="" onClick={this.onLogoutClick.bind(this)} className="nav-link">
 						<img
 							className="rounded-circle"
-							src={user.img}
+							src={user.avatar}
 							alt={user.name}
-							title="User src to show image of user"
+							title="Connect Gravatar to your email to display your image"
 							style={{ width: '25px', marginRight: '5px' }}
 						/>{' '}
 						Logout
