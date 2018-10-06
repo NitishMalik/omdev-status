@@ -5,7 +5,8 @@ const express     = require("express"),
       users       = require('./routes/api/users'),
       posts       = require('./routes/api/posts'),
       profile     = require('./routes/api/profile'),
-      path        = require('path');      
+      path        = require('path'),
+      cache       = require('./cache');      
 
 const app = express();
 

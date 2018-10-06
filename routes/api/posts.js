@@ -3,7 +3,8 @@ const express    = require('express'),
       mongoose   = require('mongoose'),
       passport   = require('passport'),
       Post       = require('../../models/Post'),
-      Profile    = require('../../models/Profile');
+      Profile    = require('../../models/Profile'),
+      clearCache = require('../../middlewares/clearCache');      
 
 //validation
 const validatePostInput = require('../../validations/post');
@@ -16,11 +17,13 @@ router.get("/test", (req, res) => res.json({msg : "Posts work !!"}));
 //@route   GET api/posts
 //@desc    Get all posts
 //@access  public
-router.get('/', (req, res)=> {
+router.get('/', async (req, res)=> {
+     
       Post.find()
+          .cache({ key : req.user.id})
           .sort({date:-1})
-          .then(posts => res.json(posts))
-          .catch(err => res.status(404).json({nopostFound:'No posts found'}))
+          .then(posts => {res.json(posts)})
+          .catch(err => res.status(404).json({nopostFound:'No posts found'}));            
 });
 
 
@@ -38,6 +41,7 @@ router.get('/:id', (req, res)=> {
 //@access  private
 router.post('/', 
       passport.authenticate('jwt',{session:false}),
+      clearCache,
       (req,res)=> {
             const {errors, isValid} = validatePostInput(req.body);
             if(!isValid){
@@ -49,7 +53,7 @@ router.post('/',
                   name: req.body.name,
                   user: req.user.id
             });
-            newPost.save().then(post => res.json(post));
+            newPost.save().then(post => res.json(post));            
 });
 
 //@route   DELETE api/posts/:id

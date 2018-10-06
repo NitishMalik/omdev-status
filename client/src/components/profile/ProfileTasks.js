@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MOment from 'react-moment';
 import Moment from 'react-moment';
 
 class ProfileTasks extends Component {
