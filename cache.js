@@ -34,7 +34,7 @@ mongoose.Query.prototype.exec = async function(){
 
         return Array.isArray(doc) ? doc.map(d => new this.model(doc)): new this.model(doc);
         
-        const doc = new this.model(JSON.parse(cachcedValue));
+        doc = new this.model(JSON.parse(cachcedValue));
         return doc;
     }
 

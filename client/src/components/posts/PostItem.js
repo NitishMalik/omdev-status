@@ -35,7 +35,7 @@ class PostItem extends Component {
 				<div className="row">
 					<div className="col-md-2">
 						<a href="profile.html">
-							<img className="rounded-circle d-none d-md-block" alt="Image to be included" />
+							<img className="rounded-circle d-none d-md-block" src={post.avatar} alt="" />
 						</a>
 						<br />
 						<p className="text-center">{post.name}</p>

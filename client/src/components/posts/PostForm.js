@@ -30,7 +30,8 @@ class PostForm extends Component {
 
 		const newPost = {
 			text: this.state.text,
-			name: user.name
+			name: user.name,
+			avatar: user.avatar
 		};
 
 		this.props.addPost(newPost);

@@ -4,7 +4,8 @@ const express = require('express'),
 	bcrypt = require('bcryptjs'),
 	jwt = require('jsonwebtoken'),
 	keys = require('../../config/keys'),
-	passport = require('passport');
+	passport = require('passport'),
+	gravatar = require('gravatar');
 
 //Load input validations
 const validateRegisterInputs = require('../../validations/register');
@@ -29,13 +30,20 @@ router.post('/register', (req, res) => {
 			errors.email = 'Email already exists !!';
 			return res.status(400).json(errors);
 		} else {
+			const avatar = gravatar.url(req.body.email, {
+				s: '200', // Size
+				r: 'pg', // Rating
+				d: 'mm' // Default
+			});
+
 			const newUser = new User({
 				name: req.body.name,
 				email: req.body.email,
+				avatar,
 				password: req.body.password
 			});
 
-			//TODO: Use _pick from loadash - Sample 
+			//TODO: Use _pick from loadash - Sample
 			//var body =_pick(req.body, ['email','password']);
 			//var user = new User(body);
 
@@ -76,7 +84,8 @@ router.post('/login', (req, res) => {
 				// Create JWT payload
 				const payload = {
 					id: user._id,
-					name: user.name
+					name: user.name,
+					avatar: user.avatar
 				};
 				//Sign the token if user matched
 				jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
