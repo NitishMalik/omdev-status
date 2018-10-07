@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { clearCurrentProfile } from '../../actions/profileActions';
+import imgBackUp from '../../img/profile_image_bckup.jpg';
 
 class Navbar extends Component {
 	onLogoutClick(e) {
@@ -18,20 +19,21 @@ class Navbar extends Component {
 			<ul className="navbar-nav ml-auto">
 				<li className="nav-item">
 					<Link className="nav-link" to="/feed">
-						Anouncements
+						Posts
 					</Link>
 				</li>
+				<li className="nav-divider"> | </li>
 				<li className="nav-item">
-					<Link className="nav-link" to="/dashboard">
-						Dashboard
+					<Link className="nav-link" to="/tasks">
+						MyTasks
 					</Link>
 				</li>
 				<li className="nav-item">
 					<a href="" onClick={this.onLogoutClick.bind(this)} className="nav-link">
 						<img
 							className="rounded-circle"
-							src={user.avatar}
-							alt={user.name}
+							src={imgBackUp}
+							alt=''
 							title="Connect Gravatar to your email to display your image"
 							style={{ width: '25px', marginRight: '5px' }}
 						/>{' '}
@@ -70,8 +72,8 @@ class Navbar extends Component {
 					<div className="collapse navbar-collapse" id="mobile-nav">
 						<ul className="navbar-nav mr-auto">
 							<li className="nav-item">
-								<Link className="nav-link" to="/profiles">
-									Developers
+								<Link className="nav-link" to="/dashboard">
+									Dashboard
 								</Link>
 							</li>
 						</ul>

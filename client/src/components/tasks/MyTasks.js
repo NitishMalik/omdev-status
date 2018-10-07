@@ -7,7 +7,7 @@ import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
 import Task from './Task';
 
-class Dashboard extends Component {
+class MyTasks extends Component {
 	onDeleteAccount = (e) => {
 		this.props.deleteAccount();
 	};
@@ -19,16 +19,17 @@ class Dashboard extends Component {
 		const { user } = this.props.auth;
 		const { profile, loading } = this.props.profile;
 
-		let dashboardContent;
+		let mytasksContent;
 		if (profile == null || loading) {
-			dashboardContent = <Spinner />;
+			mytasksContent = <Spinner />;
 		} else {
 			//check if logged in user has profile data
 			if (Object.keys(profile).length > 0) {
-				dashboardContent = (
+				mytasksContent = (
 					<div>
 						<p className="lead text-muted">
-							Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
+							Welcome{' '}
+							<Link to={`/profile/${profile._id}`}>{`${profile.firstName} ${profile.lastName}`}</Link>
 						</p>
 						<ProfileActions />
 						<Task task={profile.task} />
@@ -41,9 +42,9 @@ class Dashboard extends Component {
 				);
 			} else {
 				//Logged in user has no profile
-				dashboardContent = (
+				mytasksContent = (
 					<div>
-						<p className="lead text-muted"> Welcome {user.name}</p>
+						<p className="lead text-muted"> Welcome {user.email}</p>
 						<p>Set up your profile</p>
 						<Link to="/create-profile" className="btn btn-lg btn-info">
 							Create Profile
@@ -53,12 +54,12 @@ class Dashboard extends Component {
 			}
 		}
 		return (
-			<div className="dashboard">
+			<div className="myTasks">
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
 							<div className="display-4" style={{ fontSize: '16px' }}>
-								{dashboardContent}
+								{mytasksContent}
 							</div>
 						</div>
 					</div>
@@ -68,7 +69,7 @@ class Dashboard extends Component {
 	}
 }
 
-Dashboard.propTypes = {
+MyTasks.propTypes = {
 	getCurrentProfile: PropTypes.func.isRequired,
 	deleteAccount: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
@@ -80,4 +81,4 @@ const mapStateToProps = (state) => ({
 	auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(MyTasks);
