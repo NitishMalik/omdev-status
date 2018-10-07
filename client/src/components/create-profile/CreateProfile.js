@@ -3,25 +3,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from './../common/TextFieldGroup';
-import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
 import SelectListGroup from './../common/SelectListGroup';
 import InputGroup from './../common/InputGroup';
 import { createProfile } from '../../actions/profileActions';
+import { getTeams } from '../../actions/teamActions';
 
 class CreateProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			displaySocialInputs: false,
-			handle: '',
-			project: '',
+			firstName: '',
+			lastName: '',
 			location: '',
-			status: '',
+			jobRole: '',
+			teamId: '',
 			skills: '',
 			youtube: '',
 			linkedin: '',
 			errors: {}
 		};
+	}
+	//TODO:change to willMount
+	componentDidMount() {
+		this.props.getTeams();
 	}
 
 	onChange = (e) => {
@@ -32,10 +37,11 @@ class CreateProfile extends Component {
 		e.preventDefault();
 
 		const profileData = {
-			handle: this.state.handle,
-			project: this.state.project,
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
 			location: this.state.location,
-			status: this.state.status,
+			teamId: this.state.teamId,
+			jobRole: this.state.jobRole,
 			skills: this.state.skills,
 			youtube: this.state.youtube,
 			linkedin: this.state.linkedin
@@ -85,22 +91,52 @@ class CreateProfile extends Component {
 
 		const options = [
 			{
-				label: '*Select Profession Status',
+				name: '*Select Job Role',
 				value: 0
 			},
 			{
-				label: 'UI developer',
-				value: 'UI developer'
+				name: 'UI developer',
+				value: '1'
 			},
 			{
-				label: 'Backend developer',
-				value: 'Backend developer'
+				name: 'Backend developer',
+				value: '2'
 			},
 			{
-				label: 'Tester',
-				value: 'Tester'
+				name: 'QA',
+				value: '3'
 			}
 		];
+		let teamControl;
+		let { teams } = this.props.teams;
+		console.log(this.props.teams);
+		if (teams === null) {
+			teamControl =
+				<TextFieldGroup
+					placeholder="Team Name"
+					name="teamId"
+					value={this.state.teamId}
+					onChange={this.onChange}
+					error={errors.location}
+					info="Team Id"
+				/>
+		} else {
+			if (teams.length > 0) {
+				teamControl = <SelectListGroup
+					placeholder="Team"
+					name="teamId"
+					value={this.state.teamId}
+					onChange={this.onChange}
+					options={teams}
+					error={errors.status}
+					info="Team Name"
+				/>
+			}
+		}
+		console.log(this.props.teams);
+		// if (this.props.teams) {
+		// 	teams = this.props.teams;
+		// }
 		return (
 			<div className="create-profile">
 				<div className="container">
@@ -108,32 +144,41 @@ class CreateProfile extends Component {
 						<div className="col-md-8 m-auto">
 							<h1 className="display-4 text-center">Create Your profile</h1>
 							<p className="lead text-center">Let's get some information to create your profile</p>
-							<small className="d-block pb-3">* required fields</small>
+							{/* <small className="d-block pb-3">* required fields</small> */}
 							<form onSubmit={this.onSubmit}>
 								<TextFieldGroup
-									placeholder="* Profile Handle"
-									name="handle"
-									value={this.state.handle}
+									placeholder="First Name"
+									name="firstName"
+									value={this.state.firstName}
 									onChange={this.onChange}
-									error={errors.handle}
-									info="Unique handle for your profile"
+									error={errors.location}
+									info="First Name"
+								/>
+								<TextFieldGroup
+									placeholder="Last Name"
+									name="lastName"
+									value={this.state.lastName}
+									onChange={this.onChange}
+									error={errors.location}
+									info="Last Name"
 								/>
 								<SelectListGroup
-									placeholder="Status"
-									name="status"
-									value={this.state.status}
+									placeholder="Role"
+									name="jobRole"
+									value={this.state.jobRole}
 									onChange={this.onChange}
 									options={options}
 									error={errors.status}
-									info="Select your profile status"
+									info="Job Role"
 								/>
+								{teamControl}
 								<TextFieldGroup
 									placeholder="Location"
 									name="location"
 									value={this.state.location}
 									onChange={this.onChange}
 									error={errors.location}
-									info="Your current location"
+									info="Current location"
 								/>
 								<TextFieldGroup
 									placeholder="Skills"
@@ -141,17 +186,8 @@ class CreateProfile extends Component {
 									value={this.state.skills}
 									onChange={this.onChange}
 									error={errors.skills}
-									info="Please use comma separated values(eg HTML, CSS, JS"
+									info="Comma separated values(eg HTML, CSS, JS)"
 								/>
-								<TextAreaFieldGroup
-									placeholder="Project"
-									name="project"
-									value={this.state.project}
-									onChange={this.onChange}
-									error={errors.project}
-									info="Your current project"
-								/>
-
 								<div className="mb-3">
 									<button
 										className="btn btn-light"
@@ -175,12 +211,14 @@ class CreateProfile extends Component {
 
 CreateProfile.propTypes = {
 	errors: PropTypes.object.isRequired,
-	profile: PropTypes.object.isRequired
+	profile: PropTypes.object.isRequired,
+	teams: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
 	profile: state.profile,
-	errors: state.errors
+	errors: state.errors,
+	teams: state.team
 });
 
-export default connect(mapStateToProps, { createProfile })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, getTeams })(withRouter(CreateProfile));

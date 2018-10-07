@@ -5,7 +5,7 @@ import Spinner from '../common/Spinner';
 import { getProfiles } from '../../actions/profileActions';
 import ProfileItem from './ProfileItem';
 
-class Profiles extends Component {
+class Dashboard extends Component {
 	componentDidMount() {
 		this.props.getProfiles();
 	}
@@ -23,7 +23,7 @@ class Profiles extends Component {
 			}
 		}
 		return (
-			<div className="profiles">
+			<div className="dashboard">
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
@@ -38,7 +38,7 @@ class Profiles extends Component {
 	}
 }
 
-Profiles.propTypes = {
+Dashboard.propTypes = {
 	getProfiles: PropTypes.func.isRequired,
 	profile: PropTypes.object.isRequired
 };
@@ -48,4 +48,4 @@ const mapStateToProps = (state) => ({
 	auth: state.auth
 });
 
-export default connect(mapStateToProps, { getProfiles })(Profiles);
+export default connect(mapStateToProps, { getProfiles })(Dashboard);

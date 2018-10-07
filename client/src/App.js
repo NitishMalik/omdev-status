@@ -10,7 +10,6 @@ import Landing from './components/layout/Landing';
 import './App.css';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import Dashboard from './components/dashboard/Dashboard';
 
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
@@ -20,11 +19,12 @@ import PrivateRoute from './components/common/PrivateRoute';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import AddTask from './components/tasks/AddTask';
-import Profiles from './components/profiles/Profiles';
+import Dashboard from './components/profiles/Dashboard';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import NotFound from './components/not-found/NotFound';
 import Post from './components/post/Post';
+import MyTasks from './components/tasks/MyTasks';
 
 //Check for token
 if (localStorage.jwtToken) {
@@ -60,11 +60,11 @@ class App extends Component {
 						<div className="container">
 							<Route exact path="/register" component={Register} />
 							<Route exact path="/login" component={Login} />
-							<Route exact path="/profiles" component={Profiles} />
+							<Route exact path="/dashboard" component={Dashboard} />
 							<Route exact path="/profile/:handle" component={Profile} />
 							{/*TODO : Check if switch case is needed here. Testing needed */}
 							<Switch>
-								<PrivateRoute exact path="/dashboard" component={Dashboard} />
+								<PrivateRoute exact path="/tasks" component={MyTasks} />
 							</Switch>
 							<Switch>
 								<PrivateRoute exact path="/create-profile" component={CreateProfile} />

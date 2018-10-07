@@ -38,6 +38,11 @@ img {
   color: #bbb !important;
 }
 
+.nav-divider{
+  font-weight: 700;
+  color: #ccc;
+  padding: .5rem;
+}
 .profile-carousel {
   display: flex;
 }

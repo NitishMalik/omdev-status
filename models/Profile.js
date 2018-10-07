@@ -1,67 +1,47 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
 
 //Create Schema
 const ProfileSchema = new Schema({
-	user: {
+	uid: {
 		type: Schema.Types.ObjectId,
-		ref: 'users'
+		ref: 'users',
 	},
-	handle: {
+	teamId: {
+		type: Schema.Types.ObjectId,
+		ref: 'teams',
+	},
+	firstName: {
 		type: String,
 		required: true,
-		max: 40
 	},
-	project: {
-		type: String
+	lastName: {
+		type: String,
+		required: true,
 	},
 	location: {
-		type: String
-	},
-	status: {
 		type: String,
-		required: true
+		required: true,
+	},
+	jobRole: {
+		type: String,
+		required: true,
 	},
 	skills: {
-		type: [ String ],
-		required: true
+		type: [String],
+		required: true,
 	},
-	task: [
-		{
-			name: {
-				type: String,
-				required: true
-			},
-			application: {
-				type: String,
-				required: true
-			},
-			details: {
-				type: String
-			},
-			from: {
-				type: Date,
-				required: true
-			},
-			to: {
-				type: Date
-			},
-			dependencies: {
-				type: String
-			}
-		}
-	],
 	social: {
 		youtube: {
-			type: String
+			type: String,
 		},
 		linkedin: {
-			type: String
+			type: String,
 		}
 	},
-	date: {
+	lud: {
 		type: Date,
-		default: Date.now
+		default: Date.now,
 	}
 });
 
