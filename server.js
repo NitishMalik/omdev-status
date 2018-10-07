@@ -35,7 +35,7 @@ app.use('/api/user', user);
 app.use('/api/post', post);
 app.use('/api/profile', profile);
 app.use('/api/task', task);
-app.use('/api/team', team);
+app.use('/api/teams', team);
 
 //Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

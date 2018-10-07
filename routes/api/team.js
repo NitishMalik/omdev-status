@@ -5,7 +5,7 @@ const express = require('express'),
 //@route   GET api/team/all
 //@desc    Get all teams
 //@access  public
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
 	const errors = {};
 	console.log("Inside team route");
 	Team.find()

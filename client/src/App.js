@@ -19,7 +19,7 @@ import PrivateRoute from './components/common/PrivateRoute';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import AddTask from './components/tasks/AddTask';
-import Profiles from './components/profiles/Dashboard';
+import Dashboard from './components/profiles/Dashboard';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import NotFound from './components/not-found/NotFound';
@@ -60,7 +60,7 @@ class App extends Component {
 						<div className="container">
 							<Route exact path="/register" component={Register} />
 							<Route exact path="/login" component={Login} />
-							<Route exact path="/dashboard" component={Profiles} />
+							<Route exact path="/dashboard" component={Dashboard} />
 							<Route exact path="/profile/:handle" component={Profile} />
 							{/*TODO : Check if switch case is needed here. Testing needed */}
 							<Switch>

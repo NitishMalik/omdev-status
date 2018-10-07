@@ -3,7 +3,7 @@ import { GET_TEAMS } from './types';
 
 export const getTeams = () => (dispatch) => {
 	axios
-		.get('/api/team/all')
+		.get('/api/teams')
 		.then((res) => {
 			console.log(res);
 			dispatch({
