@@ -1,7 +1,6 @@
 import { DATE_CHANGED } from './types';
 
 export const setDateRange = (startDate, endDate) => (dispatch) => {
-    console.log("set date change: ", arguments);
     dispatch(setDateChanged(startDate, endDate));
 };
 

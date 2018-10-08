@@ -5,7 +5,6 @@ export const getTeams = () => (dispatch) => {
 	axios
 		.get('/api/teams')
 		.then((res) => {
-			console.log(res);
 			dispatch({
 				type: GET_TEAMS,
 				payload: res.data

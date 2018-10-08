@@ -57,8 +57,6 @@ class DateRangePicker extends React.Component {
             placeholderText: placeholderText
         });
 
-        console.log("calling ",start.toDate(), " end: ", end.toDate());
-
         this.props.setDateRange(start.toDate(), end.toDate());
 
     }

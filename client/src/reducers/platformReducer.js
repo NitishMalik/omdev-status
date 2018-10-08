@@ -6,7 +6,6 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-    console.log("platform reducer");
     switch (action.type) {
         case DATE_CHANGED:
             return {

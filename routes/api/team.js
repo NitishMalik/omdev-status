@@ -7,7 +7,6 @@ const express = require('express'),
 //@access  public
 router.get('/', (req, res) => {
 	const errors = {};
-	console.log("Inside team route");
 	Team.find()
 		.then((teams) => {
 			if (!teams) {
