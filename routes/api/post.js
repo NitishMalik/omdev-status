@@ -3,8 +3,7 @@ const express = require('express'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	Post = require('../../models/Post'),
-	Profile = require('../../models/Profile'),
-	clearCache = require('../../middlewares/clearCache');
+	Profile = require('../../models/Profile');
 
 //validation
 const validatePostInput = require('../../validations/post');
@@ -18,7 +17,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Posts work !!' }));
 //@access  public
 router.get('/', async (req, res) => {
 	Post.find()
-		.cache({ key: req.user.id })
+		//.cache({ key: req.user.id })
 		.sort({ date: -1 })
 		.then((posts) => {
 			res.json(posts);
@@ -38,7 +37,7 @@ router.get('/:id', (req, res) => {
 //@route   POST api/posts
 //@desc    Create post
 //@access  private
-router.post('/', passport.authenticate('jwt', { session: false }), clearCache, (req, res) => {
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 	const { errors, isValid } = validatePostInput(req.body);
 	if (!isValid) {
 		return res.status(400).json(errors);

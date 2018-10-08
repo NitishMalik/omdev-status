@@ -6,6 +6,7 @@ import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
 import Task from './Task';
+import DateRangePicker from '../dateRangeSelector/DateRangeSelector';
 
 class MyTasks extends Component {
 	onDeleteAccount = (e) => {
@@ -30,7 +31,8 @@ class MyTasks extends Component {
 						<p className="lead text-muted">
 							Welcome{' '}
 							<Link to={`/profile/${profile._id}`}>{`${profile.firstName} ${profile.lastName}`}</Link>
-						</p>
+                            <DateRangePicker />
+                        </p>
 						<ProfileActions />
 						<Task task={profile.task} />
 						<div style={{ marginBottom: '60px' }}>

@@ -6,15 +6,21 @@ import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';
 import ProfileTasks from './ProfileTasks';
 import Spinner from '../common/Spinner';
-import { getProfileByHandle } from '../../actions/profileActions';
+import { getProfileById } from '../../actions/profileActions';
 import ProfileCarousel from '../profileCarousel/ProfileCarousel';
 
 class Profile extends Component {
 	componentDidMount() {
-		if (this.props.match.params.handle) {
-			this.props.getProfileByHandle(this.props.match.params.handle);
+		if (this.props.match.params.id) {
+			this.props.getProfileById(this.props.match.params.id);
 		}
 	}
+
+    componentWillReceiveProps(nextprops) {
+        if ( nextprops.match.params.id !== this.props.match.params.id) {
+            this.props.getProfileById(nextprops.match.params.id);
+        }
+    }
 
 	render() {
 		const { profile, loading } = this.props.profile;
@@ -57,7 +63,7 @@ class Profile extends Component {
 
 Profile.propTypes = {
 	profile: PropTypes.object.isRequired,
-	getProfileByHandle: PropTypes.func.isRequired
+    getProfileById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -65,4 +71,4 @@ const mapStateToProps = (state) => ({
 	auth: state.auth
 });
 
-export default connect(mapStateToProps, { getProfileByHandle })(Profile);
+export default connect(mapStateToProps, { getProfileById })(Profile);

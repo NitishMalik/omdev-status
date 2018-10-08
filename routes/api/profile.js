@@ -67,6 +67,24 @@ router.get('/all', (req, res) => {
 // 		.catch((error) => res.status(404).json(error));
 // });
 
+//@route   GET api/profile/:id
+//@desc    Get user profile by id
+//@access  public
+router.get('/:id', (req, res) => {
+	const errors = {};
+
+	Profile.findOne({ _id: req.params.id })
+		.populate('user', [ 'name', 'email', 'avatar' ])
+		.then((profile) => {
+			if (!profile) {
+				errors.noprofile = ' No profile found for this profile id';
+				return res.status(404).json(errors);
+			}
+			res.json(profile);
+		})
+		.catch((error) => res.status(404).json(error));
+});
+
 //@route   GET api/profile/user/:user_id
 //@desc    Get user profile by handle
 //@access  public
@@ -77,7 +95,7 @@ router.get('/user/:user_id', (req, res) => {
 		.populate('user', ['name', 'email', 'avatar'])
 		.then((profile) => {
 			if (!profile) {
-				errors.noprofile = ' No profile found for this handle';
+				errors.noprofile = ' No profile found for this user id';
 				res.status(404).json(errors);
 			}
 			res.json(profile);
