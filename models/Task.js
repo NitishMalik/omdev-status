@@ -1,51 +1,40 @@
-const mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	aliasField = require('mongoose-aliasfield');
+const mongoose = require("mongoose"),
+  Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
-	uid: {
-		type: Schema.Types.ObjectId,
-		ref: 'users',
-		alias: 'userId'
-	},
-	n: {
-		type: String,
-		required: true,
-		alias: 'name'
-	},
-	p: {
-		type: String,
-		required: true,
-		alias: 'project'
-	},
-	app: {
-		type: String,
-		required: true,
-		alias: 'application'
-	},
-	d: {
-		type: String,
-		alias: 'details'
-	},
-	f: {
-		type: Date,
-		required: true,
-		alias: 'fromDate'
-	},
-	t: {
-		type: Date,
-		alias: 'toDate'
-	},
-	dp: {
-		type: String,
-		alias: 'dependencies'
-	},
-	lud: {
-		type: Date,
-		default: Date.now,
-		alias: 'lastUpdatedTimeStamp'
-	}
+  uid: {
+    type: Schema.Types.ObjectId,
+    ref: "users"
+  },
+  n: {
+    type: String,
+    required: true
+  },
+  p: {
+    type: String,
+    required: true
+  },
+  app: {
+    type: String,
+    required: true
+  },
+  d: {
+    type: String
+  },
+  f: {
+    type: Date,
+    required: true
+  },
+  t: {
+    type: Date
+  },
+  dp: {
+    type: String
+  },
+  lud: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-TaskSchema.plugin(aliasField);
-module.exports = Task = mongoose.model('tasks', TaskSchema);
+module.exports = Task = mongoose.model("tasks", TaskSchema);
