@@ -109,7 +109,6 @@ class CreateProfile extends Component {
 		];
 		let teamControl;
 		let { teams } = this.props.teams;
-		console.log(this.props.teams);
 		if (teams === null) {
 			teamControl =
 				<TextFieldGroup
@@ -133,7 +132,6 @@ class CreateProfile extends Component {
 				/>
 			}
 		}
-		console.log(this.props.teams);
 		// if (this.props.teams) {
 		// 	teams = this.props.teams;
 		// }

@@ -61,7 +61,7 @@ class App extends Component {
 							<Route exact path="/register" component={Register} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/dashboard" component={Dashboard} />
-							<Route exact path="/profile/:handle" component={Profile} />
+							<Route exact path="/profile/:id" component={Profile} />
 							{/*TODO : Check if switch case is needed here. Testing needed */}
 							<Switch>
 								<PrivateRoute exact path="/tasks" component={MyTasks} />

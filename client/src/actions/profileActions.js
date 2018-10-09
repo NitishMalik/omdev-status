@@ -68,6 +68,26 @@ export const getProfileByHandle = (handle) => (dispatch) => {
 		);
 };
 
+//Get current profile by id
+export const getProfileById = (id) => (dispatch) => {
+	dispatch(setProfileLoading());
+
+	axios
+		.get(`/api/profile/${id}`)
+		.then((res) =>
+			dispatch({
+				type: GET_PROFILE,
+				payload: res.data
+			})
+		)
+		.catch((err) =>
+			dispatch({
+				type: GET_PROFILE,
+				payload: null
+			})
+		);
+};
+
 //Create Profile
 export const createProfile = (profileData, history) => (dispatch) => {
 	axios.post('/api/profile', profileData).then((res) => history.push('/dashboard')).catch((err) => {

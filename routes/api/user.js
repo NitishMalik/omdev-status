@@ -45,7 +45,6 @@ router.post('/register', (req, res) => {
             //TODO: Use _pick from loadash - Sample
             //var body =_pick(req.body, ['email','password']);
             //var user = new User(body);
-            console.log(newUser);
             //Encrypting password
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {

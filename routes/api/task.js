@@ -27,8 +27,6 @@ router.post('/task', passport.authenticate('jwt', { session: false }), (req, res
 				dependencies: req.body.dependencies
 			};
 
-			//Add to task array
-			console.log(profile);
 			profile.task.unshift(newTask);
 
 			profile.save().then((profile) => res.json(profile));

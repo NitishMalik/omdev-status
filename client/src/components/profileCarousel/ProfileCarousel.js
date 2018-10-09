@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../common/Spinner';
 import { getProfiles } from '../../actions/profileActions';
@@ -9,9 +10,9 @@ class ProfileCarouselItem extends Component{
         const { profile } = this.props;
 
         return (
-			<div data-profileid={profile._id} className="profile-carousel-item">
+			<Link data-profileid={profile._id} className="profile-carousel-item" to={`/profile/${profile._id}`}>
 				<label>{profile.user.name}</label>
-			</div>
+			</Link>
         );
     }
 };
