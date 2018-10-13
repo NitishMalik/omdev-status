@@ -6,11 +6,15 @@ const TaskSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
-  n: {
+  pid: {
+    type: Schema.Types.ObjectId,
+    ref: "profiles"
+  },
+  taskName: {
     type: String,
     required: true
   },
-  p: {
+  project: {
     type: String,
     required: true
   },
@@ -18,17 +22,17 @@ const TaskSchema = new Schema({
     type: String,
     required: true
   },
-  d: {
+  details: {
     type: String
   },
-  f: {
+  from: {
     type: Date,
     required: true
   },
-  t: {
+  to: {
     type: Date
   },
-  dp: {
+  dependencies: {
     type: String
   },
   lud: {

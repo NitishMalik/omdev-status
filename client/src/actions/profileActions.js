@@ -104,7 +104,7 @@ export const createProfile = (profileData, history) => dispatch => {
 //add task
 export const addTask = (taskData, history) => dispatch => {
   axios
-    .post("/api/profile/task", taskData)
+    .post("/api/task", taskData)
     .then(res => history.push("/dashboard"))
     .catch(err => {
       dispatch({

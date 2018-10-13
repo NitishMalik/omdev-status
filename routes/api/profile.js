@@ -21,7 +21,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
-    Profile.findOne({ user: req.user.id })
+    Profile.findOne({ uid: req.user.id })
       .populate("user", ["email", "avatar"])
       .then(profile => {
         if (!profile) {
@@ -58,7 +58,6 @@ router.get("/all", (req, res) => {
 //@access  public
 router.get("/:id", (req, res) => {
   const errors = {};
-  console.log("Inside id search");
 
   Profile.findOne({ _id: req.params.id })
     .populate("user", ["email", "avatar"])
