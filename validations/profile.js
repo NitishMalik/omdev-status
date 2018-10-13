@@ -1,37 +1,48 @@
-const Validator = require('validator'),
-      isEmpty = require('./is-empty');
+const Validator = require("validator"),
+  isEmpty = require("./is-empty");
 
-module.exports = function validateProfileInput(data){
-    let errors ={};
-    
-    data.handle = !isEmpty(data.handle) ? data.handle : '';
-    data.status = !isEmpty(data.status) ? data.status : '';  
-    data.skills = !isEmpty(data.skills) ? data.skills : '';    
+module.exports = function validateProfileInput(data) {
+  let errors = {};
 
-    if(!Validator.isLength(data.handle, {min:2 , max: 40})){
-        errors.handle = "Handle should be between 2 to 40 chars"
-    }
+  data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
+  data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
+  data.jobRole = !isEmpty(data.jobRole) ? data.jobRole : "";
+  data.teamId = !isEmpty(data.teamId) ? data.teamId : "";
+  data.location = !isEmpty(data.location) ? data.location : "";
+  data.skills = !isEmpty(data.skills) ? data.skills : "";
 
-    if(Validator.isEmpty(data.handle)){
-        errors.handle = "handle field is required";
-    }
+  if (Validator.isEmpty(data.firstName)) {
+    errors.firstName = "FirstName field is required";
+  }
 
-    if(Validator.isEmpty(data.status)){
-        errors.status = "status field is required";
-    }
+  if (Validator.isEmpty(data.lastName)) {
+    errors.lastName = "LastName field is required";
+  }
 
-    if(Validator.isEmpty(data.skills)){
-        errors.skills = "skills field is required";
-    }
+  if (Validator.isEmpty(data.teamId)) {
+    errors.teamId = "Team field is required";
+  }
 
-    if(!isEmpty(data.linkedin)){
-        if(!Validator.isURL(data.linkedin)){
-            errors.linkedin = "Not a valid linkedin URL"
-        }
+  if (Validator.isEmpty(data.location)) {
+    errors.location = "Location field is required";
+  }
+
+  if (Validator.isEmpty(data.jobRole)) {
+    errors.jobRole = "JobRole field is required";
+  }
+
+  if (Validator.isEmpty(data.skills)) {
+    errors.skills = "skills field is required";
+  }
+
+  if (!isEmpty(data.linkedin)) {
+    if (!Validator.isURL(data.linkedin)) {
+      errors.linkedin = "Not a valid linkedin URL";
     }
-   
-    return {
-        errors, 
-        isValid : isEmpty(errors)
-    }
-}
+  }
+
+  return {
+    errors,
+    isValid: isEmpty(errors)
+  };
+};
